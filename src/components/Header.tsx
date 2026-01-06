@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({ searchTerm = '', onSearchChange, placeh
 
         {/* Centered Search */}
         <div className="flex-1 flex justify-center">
-          <div className="bg-white p-2 rounded-3xl w-full">
+          <div className="bg-white p-2 rounded-3xl">
             <div className="flex items-center gap-2 md:gap-4">
               <div className="relative flex-1">
                 <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />

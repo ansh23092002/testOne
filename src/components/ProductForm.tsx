@@ -15,9 +15,15 @@ const ProductForm: React.FC<ProductFormProps> = ({
   onCancel,
   categories,
 }) => {
-  const [formData, setFormData] = useState<ProductFormData>({
+  const [formData, setFormData] = useState<{
+    title: string;
+    price: number | string;
+    description: string;
+    image: string;
+    category: string;
+  }>({
     title: '',
-    price: 0,
+    price: '',
     description: '',
     image: '',
     category: '',
@@ -29,7 +35,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     if (productToEdit) {
       setFormData({
         title: productToEdit.title || '',
-        price: productToEdit.price || 0,
+        price: productToEdit.price?.toString() || '',
         description: productToEdit.description || '',
         image: productToEdit.image || '',
         category: productToEdit.category || '',
@@ -37,7 +43,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     } else {
       setFormData({
         title: '',
-        price: 0,
+        price: '',
         description: '',
         image: '',
         category: categories[0] || '',
@@ -49,7 +55,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'price' ? parseFloat(value) || 0 : value,
+      [name]: name === 'price' ? (value === '' ? '' : parseFloat(value) || 0) : value,
     }));
     if (errors[name as keyof ProductFormData]) {
       setErrors((prev) => ({
@@ -66,7 +72,8 @@ const ProductForm: React.FC<ProductFormProps> = ({
       newErrors.title = 'Title is required';
     }
 
-    if (!formData.price || formData.price <= 0) {
+    const priceValue = typeof formData.price === 'string' ? parseFloat(formData.price) : formData.price;
+    if (!formData.price || isNaN(priceValue) || priceValue <= 0) {
       newErrors.price = 'Price must be greater than 0';
     }
 
@@ -86,7 +93,11 @@ const ProductForm: React.FC<ProductFormProps> = ({
     e.preventDefault();
     
     if (validate()) {
-      onSave(formData);
+      const submitData = {
+        ...formData,
+        price: typeof formData.price === 'string' ? parseFloat(formData.price) : formData.price,
+      };
+      onSave(submitData);
     }
   };
 

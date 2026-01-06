@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { FiPackage, FiPlus } from 'react-icons/fi';
+import { toast } from 'sonner';
 import ProductCard from '../components/ProductCard';
 import ProductForm from '../components/ProductForm';
 import Sidebar from '../components/Sidebar';
@@ -51,8 +52,14 @@ const Products: React.FC = () => {
       const newProduct = await addProduct(productData);
       setProducts(prev => [newProduct, ...prev]);
       setShowForm(false);
+      toast.success('Product added successfully!', {
+        description: `${productData.title} has been added to your inventory.`
+      });
     } catch (error) {
-      console.error('Error adding product:', error);
+   
+       toast.error('Failed to add product', {
+        description: 'Please try again later.'
+      });
     }
   };
 
@@ -68,19 +75,32 @@ const Products: React.FC = () => {
         setProducts(prev => prev.map(p => p.id === editingProduct.id ? updatedProduct : p));
         setEditingProduct(null);
         setShowForm(false);
+        toast.success('Product updated successfully!', {
+          description: `${productData.title} has been updated.`
+        });
       } catch (error) {
         console.error('Error updating product:', error);
+        toast.error('Failed to update product', {
+          description: 'Please try again later.'
+        });
       }
     }
   };
 
   const handleDeleteProduct = async (id: number) => {
+    const product = products.find(p => p.id === id);
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
         await deleteProduct(id);
         setProducts(prev => prev.filter(p => p.id !== id));
+        toast.success('Product deleted successfully!', {
+          description: product ? `${product.title} has been removed.` : 'Product has been removed.'
+        });
       } catch (error) {
         console.error('Error deleting product:', error);
+        toast.error('Failed to delete product', {
+          description: 'Please try again later.'
+        });
       }
     }
   };

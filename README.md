@@ -7,11 +7,15 @@ A modern, full-featured Product Management Dashboard built with React 19, TypeSc
 ✅ **Display Products** - Fetches and displays products from Fake Store API in a responsive card grid  
 ✅ **Add Product** - Create new products with a validated form (POST request)  
 ✅ **Edit Product** - Update existing product details (PUT request)  
-✅ **Delete Product** - Remove products with confirmation dialog (DELETE request)  
-✅ **Search** - Real-time search by product title  
-✅ **Filter** - Filter products by category  
-✅ **Responsive Design** - Mobile-first design with Tailwind CSS  
-✅ **Icons** - Beautiful icons using React Icons (Feather Icons)
+✅ **Delete Product** - Remove products with confirmation dialog (DELETE request)
+✅ **Search** - Real-time search by product title
+✅ **Filter** - Filter products by category
+✅ **Responsive Design** - Mobile-first design with Tailwind CSS
+✅ **Icons** - Beautiful icons using React Icons (Feather & Lucide)
+✅ **Toast Notifications** - Sonner toasts for all API actions
+✅ **Indian Rupee Support** - ₹ icon for price display
+✅ **Modern Dashboard** - Animated stats, charts, top products, gradients
+✅ **Under Development & 404 Pages** - Friendly fallback screens
 
 ## 🛠️ Tech Stack
 
@@ -42,11 +46,11 @@ npm run lint     # Run ESLint
 ```
 src/
 ├── components/
-│   ├── ProductCard.tsx       # Product card with edit/delete buttons
+│   ├── ProductCard.tsx       # Product card with edit/delete menu, rupee icon, rating
 │   ├── ProductForm.tsx       # Add/Edit modal form with validation
-│   └── SearchFilter.tsx      # Search and category filter
+│   └── SearchFilter.tsx      # (deprecated, now in Header)
 ├── pages/
-│   └── Products.tsx          # Main products page with state management
+│   └── Products.tsx          # Main products page with Sonner toasts, CRUD, search/filter
 ├── services/
 │   └── productService.ts     # API service with TypeScript types
 ├── App.tsx                   # React Router setup
@@ -58,10 +62,10 @@ src/
 
 ### 1. Product Display
 - Responsive grid (1-4 columns based on screen size)
-- Product cards with image, title, price, category, description
+- Product cards with image, title, price (₹), category, description
 - Star ratings with React Icons
 - Loading spinner during initial fetch
-- Hover effects and smooth transitions
+- Hover effects, gradients, and smooth transitions
 
 ### 2. Add/Edit Operations
 - Modal form with validation
@@ -69,6 +73,7 @@ src/
 - Dynamic category dropdown from API
 - Separate modes for add/edit
 - Error handling and user feedback
+- Sonner toast notifications for success/error
 
 ### 3. Search & Filter
 - Real-time search by product title (case-insensitive)
@@ -82,6 +87,7 @@ src/
 - Optimistic UI updates
 - DELETE request to API
 - Error handling
+- Sonner toast notifications for success/error
 
 ## 🔌 API Integration
 
@@ -99,11 +105,14 @@ Base URL: `https://fakestoreapi.com`
 ## 🎨 Design Highlights
 
 - **Purple-Indigo gradient header** with package icon
-- **Card-based layout** with shadows and hover effects
+- **Animated dashboard** with stats, charts, top products, gradients
+- **Card-based layout** with shadows, gradients, and hover effects
 - **Form validation** with inline error messages
 - **Responsive design** - mobile, tablet, desktop
 - **Tailwind utilities** for consistent spacing and colors
-- **Feather Icons** for UI elements (FiPlus, FiEdit, FiTrash2, FiSearch, FiStar, FiX, FiPackage)
+- **Feather & Lucide Icons** for UI elements (FiPlus, FiEdit, FiTrash2, FiSearch, FiStar, FiX, FiPackage, LuIndianRupee)
+- **Sonner Toasts** for all API actions
+- **Under Development & 404 Pages** for friendly navigation
 
 ## 💡 Technical Implementation
 
@@ -138,12 +147,12 @@ Base URL: `https://fakestoreapi.com`
 - Changes don't persist across page refresh
 - Alert dialogs used for user feedback (can be replaced with toast notifications)
 
+
 ## 🚀 Future Enhancements
 
 - [ ] Pagination/infinite scroll
 - [ ] Sort by price, rating, name
 - [ ] Image upload with preview
-- [ ] Toast notifications (replace alerts)
 - [ ] Dark mode toggle
 - [ ] Product detail page
 - [ ] Shopping cart
@@ -153,5 +162,5 @@ Base URL: `https://fakestoreapi.com`
 
 ---
 
-**Built with ❤️ for Intricare Technologies**  
-React 19 + TypeScript + Tailwind CSS 4 + React Router + React Icons
+**Built with ❤️ for Intricare Technologies**
+React 19 + TypeScript + Tailwind CSS 4 + React Router + React Icons + Sonner
